@@ -168,6 +168,49 @@ class Arbol{
         }
         this.raiz = this.primero;
     }
+
+    solveWithPreorder(exp){
+        let tam=exp.length-1;
+        let vec=arbolito1.splitExpression(exp);
+
+        for (let i=tam; i > -1; i--) {
+            switch (vec[i]) {
+                case "+":
+                    console.log((parseInt(vec[vec.length-1]) + parseInt(vec[vec.length-2])));
+                    vec[vec.length - 2] = parseInt(vec[vec.length - 1]) + parseInt(vec[vec.length-2]);
+                    vec.pop();
+                    break;
+
+
+                case "-":
+                    console.log(+(parseInt(vec[vec.length-1]) - parseInt(vec[vec.length - 2])));
+                    vec[vec.length-2]=parseInt(vec[vec.length-1]) - parseInt(vec[vec.length-2]);
+                    vec.pop();
+                    break;
+
+
+                case "*":
+                    console.log(+ (parseInt(vec[vec.length - 1]) * parseInt(vec[vec.length-2])));
+                    vec[vec.length - 2] = parseInt(vec[vec.length-1]) * parseInt(vec[vec.length-2]);
+                    vec.pop();
+                    break;
+
+
+
+                case "/":
+                    console.log(+ (parseInt(vec[vec.length-1]) / parseInt(vec[vec.length-2])));
+                    vec[vec.length-2] = parseInt(vec[vec.length - 1]) / parseInt(vec[vec.length - 2]);
+                    vec.pop();
+                    break;
+
+
+                default:
+                    vec.push(vec[i]);
+                    break;
+            }
+        }
+        return vec[0];
+    }
     
 }
 
@@ -177,6 +220,7 @@ arbolito1.splitExpression("2*3+4-5+6");
 console.log(arbolito1.print());
 //console.log(arbolito1.createArbol());
 console.log(arbolito1.preOrder());
+console.log(arbolito1.solveWithPreorder("+-+*23456"));
 
 
 
