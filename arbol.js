@@ -17,12 +17,58 @@ class Arbol{
     }
 
     //1.- Tomar la expresión y generar el árbol binario, imprimiendo la notación preorder y postorder
-    preOrder(){ //RID
-
+    preOrder(){ 
+        if (!this.raiz) {
+            return ".";
+        }
+        else {
+            return _preOrderRecursivo(this.raiz, new Array());
+        }
+    
     }
+
+    _preOrderRecursivo(nodo, vector){
+        if (nodo===null){
+            return; 
+        }
+        vector.push(nodo.num);
+    
+        if (nodo.hijoIzquierda){ 
+            _preOrderRecursivo(nodo.hijoIzquierda, vector);
+        }
+        if (nodo.hijoDerecha){ 
+            _preOrderRecursivo(nodo.hijoDerecha, vector);
+        }
+    
+        return vector;
+    }
+
+
+
     //1.- Tomar la expresión y generar el árbol binario, imprimiendo la notación preorder y postorder
     postOrder(){
+        if (!this.raiz) {
+            return ".";
+        }
+        else {
+            return postOrderRecursivo(this.raiz, new Array());
+        }
+    }
 
+    _postOrderRecursivo(nodo,vector){
+        if (nodo == null){
+            return;
+        }
+
+        if (nodo.hijoIzquierda){
+            postOrderRec(nodo.hijoIzquierda, vector);
+        }
+
+        if (nodo.hijoDerecha){
+            postOrderRec(nodo.hijoDerecha, vector);
+        }
+        array.push(nodo.num);
+        return vector;
     }
 
     //Separación de la expresión para poder usarla como vector utilizando el metodo split
@@ -130,6 +176,12 @@ let arbolito1=new Arbol();
 arbolito1.splitExpression("2*3+4-5+6");
 console.log(arbolito1.print());
 //console.log(arbolito1.createArbol());
+console.log(arbolito1.preOrder());
+
+
+
+
+
 
 
 
